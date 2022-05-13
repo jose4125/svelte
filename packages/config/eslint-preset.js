@@ -1,14 +1,4 @@
 module.exports = {
-  extends: ["next", "prettier"],
-  settings: {
-    next: {
-      rootDir: ["apps/*/", "packages/*/"],
-    },
-  },
-  rules: {
-    "@next/next/no-html-link-for-pages": "off",
-    "react/jsx-key": "off",
-  },
   env: {
     browser: true,
     es6: true,
@@ -19,7 +9,7 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["prettier", "svelte3"],
-  extends: ["eslint:recommended"],
+  extends: ["eslint:recommended", "prettier"],
   rules: {
     "no-console": 1,
   },

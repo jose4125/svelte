@@ -1,5 +1,5 @@
 {
-  "name": "svelte-setup",
+  "name": "project-setup",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "lint:fix": "npx eslint --fix \"{,!(node_modules|public)/**/}*.{js,svelte}\"",
     "format": "npx prettier --write \"{,!(node_modules|public)/**/}*.{js,svelte}\"",
-    "lint": "npx eslint ./src/**/*.{js,svelte}",
+    "lint": "npx eslint ./src",
     "lint:watch": "npx esw -w --color --clear src --ext .js,.svelte"
   },
   "devDependencies": {
