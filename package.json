@@ -10,15 +10,32 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prepare": "husky install",
+    "test": "turbo run test"
   },
   "devDependencies": {
+    "husky": "^8.0.1",
+    "lint-staged": "^12.4.2",
     "prettier": "latest",
     "turbo": "latest"
   },
   "engines": {
     "npm": ">=7.0.0",
     "node": ">=14.0.0"
+  },
+  "lint-staged": {
+    "apps/**/src/*.{js,ts, jsx, tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "packages/**/*.{js,ts, jsx, tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
   },
   "packageManager": "yarn@1.22.17"
 }

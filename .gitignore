@@ -12,10 +12,22 @@ coverage
 .next/
 out/
 build
+dist
+dist-ssr
+public/bundle.*
+*.local
 
 # misc
 .DS_Store
 *.pem
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # debug
 npm-debug.log*

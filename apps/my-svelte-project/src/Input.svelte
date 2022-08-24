@@ -11,7 +11,6 @@
   };
 
   $: if (value.length >= 3) {
-    console.log('value', value);
     movieList = [];
     apiError = '';
     movieList = fetch(`https://www.omdbapi.com/?s=${value}&apikey=${apiKey}`)
