@@ -1,6 +1,7 @@
 <script>
   import ContactCard from './ContactCard.svelte';
   import Bindings from './Bindings.svelte';
+  import EventForwarding from './EventForwarding.svelte';
 
   let name = 'Max';
   let title = '';
@@ -124,6 +125,8 @@
 {:else}
   <p>Please start adding some contacts, we found none</p>
 {/each}
+
+<EventForwarding />
 
 <h1>Bindings</h1>
 <Bindings />
