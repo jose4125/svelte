@@ -2,6 +2,7 @@
   import ContactCard from './ContactCard.svelte';
   import Bindings from './Bindings.svelte';
   import EventForwarding from './EventForwarding.svelte';
+  import Modal from './Modal.svelte';
 
   let name = 'Max';
   let title = '';
@@ -12,6 +13,9 @@
   let formState = 'empty';
   let createdContacts = [];
   let storedPasswords = [];
+
+  let showModal = false;
+  let closeable = false;
 
   $: {
     if (password.length > 0 && password.length < 5) {
@@ -66,6 +70,9 @@
       storedPassword => storedPassword !== password,
     );
   };
+
+  const closeModal = () => (showModal = false);
+  const cancelModal = () => (showModal = false);
 </script>
 
 <form id="form">
@@ -127,6 +134,18 @@
 {/each}
 
 <EventForwarding />
+<br />
+<br />
+<button on:click={() => (showModal = true)}>Show Modal</button>
+{#if showModal}
+  <Modal on:cancel={cancelModal} on:close={closeModal} let:didAgree={closeable}>
+    <h1 slot="header">hello</h1>
+    <p>content</p>
+    <button slot="footer" on:click={closeModal} disabled={!closeable}
+      >Confirm</button
+    >
+  </Modal>
+{/if}
 
 <h1>Bindings</h1>
 <Bindings />
