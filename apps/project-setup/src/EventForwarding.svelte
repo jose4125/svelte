@@ -1,5 +1,5 @@
 <script>
-  import Product from './Product.svelte';
+  import Book from './Book.svelte';
 
   const products = [
     {
@@ -27,5 +27,5 @@
 </script>
 
 {#each products as product}
-  <Product {...product} on:add-to-cart={addToCart} on:delete={deleteProduct} />
+  <Book {...product} on:add-to-cart={addToCart} on:delete={deleteProduct} />
 {/each}

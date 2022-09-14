@@ -1,7 +1,4 @@
 <script>
-  import App from './App.svelte';
-  import ContactCard from './ContactCard.svelte';
-
   import CustomInput from './CustomInput.svelte';
   import { isValidEmail } from './isValidEmail.js';
 

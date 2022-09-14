@@ -3,6 +3,7 @@
   import Bindings from './Bindings.svelte';
   import EventForwarding from './EventForwarding.svelte';
   import Modal from './Modal.svelte';
+  import StateWithStores from './StateWithStores.svelte';
 
   let name = 'Max';
   let title = '';
@@ -133,9 +134,17 @@
   <p>Please start adding some contacts, we found none</p>
 {/each}
 
+<h1>
+  event forowarding - custom events - extract data - spread props and default
+  props
+</h1>
 <EventForwarding />
 <br />
 <br />
+<h1>
+  slots - named and default slots - event forwarding - send data from slot to
+  the parent - lifecicles
+</h1>
 <button on:click={() => (showModal = true)}>Show Modal</button>
 {#if showModal}
   <Modal on:cancel={cancelModal} on:close={closeModal} let:didAgree={closeable}>
@@ -147,8 +156,10 @@
   </Modal>
 {/if}
 
-<h1>Bindings</h1>
+<h1>components - Bindings and Forms</h1>
 <Bindings />
+<h1>managing state & data with stores</h1>
+<StateWithStores />
 
 <style>
   #form {
