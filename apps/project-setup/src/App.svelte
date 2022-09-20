@@ -4,6 +4,7 @@
   import EventForwarding from './EventForwarding.svelte';
   import Modal from './Modal.svelte';
   import StateWithStores from './StateWithStores.svelte';
+  import Animations from './Animations.svelte';
 
   let name = 'Max';
   let title = '';
@@ -158,6 +159,8 @@
 
 <h1>components - Bindings and Forms</h1>
 <Bindings />
+<h1>animations and transforms</h1>
+<Animations />
 <h1>managing state & data with stores</h1>
 <StateWithStores />
 
