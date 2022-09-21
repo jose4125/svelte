@@ -26,7 +26,7 @@
 
 <article class="meetup-item">
   <header>
-    <h1 class:meetup-item__header--favorite={isFavorite}>
+    <h1>
       {title}
       {#if isFavorite}
         <Badge>FAVORITE</Badge>

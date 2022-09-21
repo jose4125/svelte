@@ -1,4 +1,8 @@
-<span class="badge"><slot /></span>
+<script>
+  import { slide } from 'svelte/transition';
+</script>
+
+<span class="badge" transition:slide><slot /></span>
 
 <style>
   .badge {
