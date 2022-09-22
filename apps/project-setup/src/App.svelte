@@ -4,6 +4,7 @@
   import EventForwarding from './EventForwarding.svelte';
   import Modal from './Modal.svelte';
   import StateWithStores from './StateWithStores.svelte';
+  import NetworkInteraction from './NetworkInteraction.svelte';
   import Animations from './Animations.svelte';
 
   let name = 'Max';
@@ -163,6 +164,8 @@
 <Animations />
 <h1>managing state & data with stores</h1>
 <StateWithStores />
+<h1>network interaction - http</h1>
+<NetworkInteraction />
 
 <style>
   #form {
