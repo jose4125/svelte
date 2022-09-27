@@ -6,6 +6,9 @@
   import StateWithStores from './StateWithStores.svelte';
   import NetworkInteraction from './NetworkInteraction.svelte';
   import Animations from './Animations.svelte';
+  import DinamicComponents from './dinamicComponents/DinamicComponents.svelte';
+  import RecursiveComponents from './RecursiveComponents.svelte';
+  import WindowBodyHead from './WindowBodyHead.svelte';
 
   let name = 'Max';
   let title = '';
@@ -166,6 +169,12 @@
 <StateWithStores />
 <h1>network interaction - http</h1>
 <NetworkInteraction />
+<h1>window events - body - head</h1>
+<WindowBodyHead />
+<h1>dinamic components</h1>
+<DinamicComponents />
+<h1>recursive components</h1>
+<RecursiveComponents />
 
 <style>
   #form {
