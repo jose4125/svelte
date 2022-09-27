@@ -1,5 +1,5 @@
 <script>
-  export let href, mode, disabled;
+  export let href, mode, className, disabled;
   export let type = 'button';
   export let color = null;
 </script>
@@ -9,7 +9,7 @@
     <slot />
   </a>
 {:else}
-  <button {type} class="{mode} {color}" {disabled} on:click>
+  <button {type} class="{mode} {color} {className}" {disabled} on:click>
     <slot />
   </button>
 {/if}
@@ -89,5 +89,8 @@
   .outline.success:hover,
   .outline.success:active {
     background: #c2ffd1;
+  }
+  .favorite {
+    min-width: 110px;
   }
 </style>

@@ -3,8 +3,11 @@
   import meetupsStore from 'meetups/meetupsStore.js';
   import Button from 'ui/Button.svelte';
   import Badge from 'ui/Badge.svelte';
+  import { fetchData } from 'helpers/fetch.js';
 
   export let id, title, subtitle, description, imageUrl, address, isFavorite;
+
+  let isLoading = false;
 
   $: favoriteButtonText = isFavorite ? 'Unfavorite' : 'Favorite';
   $: buttonColor = isFavorite ? null : 'success';
@@ -12,7 +15,19 @@
   const dispatch = createEventDispatcher();
 
   const toggleFavorite = () => {
-    meetupsStore.toggleFavorite(id);
+    isLoading = true;
+    fetchData({
+      data: { isFavorite: !isFavorite },
+      method: 'PATCH',
+      id,
+      cb: ({ error }) => {
+        if (error) {
+          errorMessage = error.message;
+        }
+        meetupsStore.toggleFavorite(id);
+        isLoading = false;
+      },
+    });
   };
 
   const showDetail = () => {
@@ -45,11 +60,20 @@
     <Button mode="outline" type="button" on:click={editMeetup}>edit</Button>
     <Button
       mode="outline"
+      className="favorite"
       color={buttonColor}
       on:click={() => {
         toggleFavorite();
-      }}>{favoriteButtonText}</Button
+      }}
     >
+      {#if isLoading && isFavorite === false}
+        ❤️
+      {:else if isLoading && isFavorite === true}
+        💔
+      {:else}
+        {favoriteButtonText}
+      {/if}
+    </Button>
     <Button on:click={showDetail}>Show Details</Button>
   </footer>
 </article>

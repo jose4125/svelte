@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { isEmpty, isValidEmail } from 'helpers/validation.js';
+  import { fetchData } from 'helpers/fetch.js';
   import meetupsStore from 'meetups/meetupsStore.js';
 
   import Field from 'ui/Field.svelte';
@@ -56,7 +57,31 @@
       description,
     };
 
-    id ? meetupsStore.updateMeetup(id, meetup) : meetupsStore.addMeetup(meetup);
+    if (!id) {
+      fetchData({
+        data: { ...meetup, isFavorite: false },
+        method: 'POST',
+        cb: ({ data }) => {
+          console.log('=== data', data);
+          meetupsStore.addMeetup({
+            ...meetup,
+            id: data.name,
+            isFavorite: false,
+          });
+        },
+      });
+    }
+
+    if (id) {
+      fetchData({
+        data: meetup,
+        method: 'PATCH',
+        id,
+        cb: ({ data, id }) => {
+          meetupsStore.updateMeetup(id, data);
+        },
+      });
+    }
 
     dispatch('closemodal');
   };
@@ -66,7 +91,13 @@
   };
 
   const deleteMeetup = () => {
-    meetupsStore.deleteMeetup(id);
+    fetchData({
+      method: 'DELETE',
+      id,
+      cb: ({ id }) => {
+        meetupsStore.deleteMeetup(id);
+      },
+    });
     dispatch('closemodal');
   };
 </script>

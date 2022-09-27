@@ -34,13 +34,20 @@
   <MeetupFilter on:filtermeetups={filterMeetups} />
   <Button on:click={showMeetupForm}>New Meetup</Button>
 </div>
-<section class="meetup">
-  {#each selectedMeetups as meetup (meetup.id)}
-    <div transition:scale={{ duration: 3000 }} animate:flip={{ duration: 300 }}>
-      <MeetupItem {...meetup} on:showdetail on:editmeetup />
-    </div>
-  {/each}
-</section>
+{#if selectedMeetups.length === 0}
+  <p class="no-meetups">not meetups found, you can start adding some!!!</p>
+{:else}
+  <section class="meetup">
+    {#each selectedMeetups as meetup (meetup.id)}
+      <div
+        transition:scale={{ duration: 300 }}
+        animate:flip={{ duration: 300 }}
+      >
+        <MeetupItem {...meetup} on:showdetail on:editmeetup />
+      </div>
+    {/each}
+  </section>
+{/if}
 
 <style>
   .meetup {
@@ -54,6 +61,13 @@
     display: flex;
     justify-content: space-between;
     margin: 1rem;
+  }
+
+  .no-meetups {
+    background-color: lightgray;
+    margin: 1rem;
+    padding: 1rem 0;
+    text-align: center;
   }
 
   @media (min-width: 768px) {
