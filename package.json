@@ -25,14 +25,6 @@
     "node": ">=14.0.0"
   },
   "lint-staged": {
-    "apps/**/src/*.{js,ts, jsx, tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "packages/**/*.{js,ts, jsx, tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
     "*.json": [
       "prettier --write"
     ]

@@ -1,5 +1,5 @@
 export const fetchData = ({ data = {}, method = 'GET', id, cb }) => {
-  const url = 'https://svelte-course-jd-default-rtdb.firebaseiocom/meetups';
+  const url = 'https://svelte-course-jd-default-rtdb.firebaseio.com/meetups';
   const urlExtension = '.json';
   let completeUrl = `${url}${urlExtension}`;
 

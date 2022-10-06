@@ -1,0 +1,27 @@
+{
+  "extends": "@tsconfig/svelte/tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "weather/*": ["./src/weather/*"],
+      "weatherClean/*": ["./src/weather-clean/*"]
+    },
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "lib": ["DOM", "ES2017", "WebWorker"],
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
+    "importsNotUsedAsValues": "remove",
+    "skipLibCheck": true,
+    "pretty": true,
+    "allowJs": true,
+    "checkJs": true
+  },
+  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
+  "references": [{ "path": "./tsconfig.sveltejs.node.json" }]
+}
