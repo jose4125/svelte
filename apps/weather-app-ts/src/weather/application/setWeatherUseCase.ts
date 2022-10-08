@@ -1,8 +1,14 @@
 import type { Weather } from 'weather/domain/weatherEntity';
-import type { WeatherRepository } from 'weather/domain/weatherRepository';
+import type { SetWeatherRepository } from 'weather/domain/weatherRepository';
 
-type SetWeatherRepository = Pick<WeatherRepository, 'setWeather'>;
+interface SetWeatherUseCase {
+  setWeather: SetWeatherRepository;
+  weather: Weather;
+}
 
-export const setWeatherUseCase = ({ setWeather, weather }) => {
+export const setWeatherUseCase = ({
+  setWeather,
+  weather,
+}: SetWeatherUseCase) => {
   setWeather(weather);
 };

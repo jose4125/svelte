@@ -6,29 +6,29 @@ const weatherStore = writable({
     city: '',
     country: '',
     degrees: 0,
+    weatherIcon: '',
     maxDegrees: 0,
     minDegrees: 0,
     description: '',
   },
 });
 
-const getWeatherAction = cb => {
-  weatherStore.subscribe(currentWeather => {
-    cb(currentWeather.weather);
-  });
-};
-
-const setWeatherAction = (weatherData: Weather) => {
-  console.log('=== data', weatherData);
+const loadInitialWeatherAction = (weatherData: Weather) => {
   weatherStore.set({
     weather: weatherData,
   });
 };
 
+const updateWeatherAction = (weatherData: Weather) => {
+  weatherStore.update(currentWeather => {
+    return { ...currentWeather, weather: weatherData };
+  });
+};
+
 const weatherCustomStore = {
-  subscribe: weatherStore.subscribe,
-  setWeatherAction,
-  getWeatherAction,
+  store: weatherStore,
+  loadInitialWeatherAction,
+  updateWeatherAction,
 };
 
 export default weatherCustomStore;

@@ -1,4 +1,11 @@
-export const weatherAdapter = ({ name, sys, main, weather }) => {
+import type { WeatherResponse } from 'weather/domain/weatherResponseEntity';
+
+export const weatherAdapter = ({
+  name,
+  sys,
+  main,
+  weather,
+}: WeatherResponse) => {
   return {
     city: name,
     country: sys.country,
