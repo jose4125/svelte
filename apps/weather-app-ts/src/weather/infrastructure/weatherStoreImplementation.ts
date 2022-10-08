@@ -3,15 +3,17 @@ import type { WeatherRepository } from 'weather/domain/weatherRepository';
 import weatherCustomStore from './weatherStore';
 
 export const weatherStoreImplementation = (): WeatherRepository => {
-  const getWeather = cb => {
-    weatherCustomStore.getWeatherAction(cb);
+  const loadInitialWeather = (weather: Weather) => {
+    weatherCustomStore.loadInitialWeatherAction(weather);
   };
-  const setWeather = (weather: Weather) => {
-    weatherCustomStore.setWeatherAction(weather);
+
+  const updateWeather = (weather: Weather) => {
+    weatherCustomStore.updateWeatherAction(weather);
   };
 
   return {
-    getWeather,
-    setWeather,
+    store: weatherCustomStore.store,
+    loadInitialWeather,
+    updateWeather,
   };
 };

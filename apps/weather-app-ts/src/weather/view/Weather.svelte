@@ -1,25 +1,24 @@
 <script lang="ts">
-  import type { Weather } from 'weather/domain/weatherEntity';
+  import { onMount } from 'svelte';
   import { weatherStoreImplementation } from 'weather/infrastructure/weatherStoreImplementation';
   import { weatherController } from 'weather/infrastructure/weatherController';
 
-  let weather: Weather;
   let city = '';
-  let isLoading = false;
+  let isLoading = true;
 
-  const store = weatherStoreImplementation();
-  const { getWeather, setWeather } = weatherController(store);
+  const storeImp = weatherStoreImplementation();
+  const { loadInitialWeather, updateWeather } = weatherController(storeImp);
+  const { store } = storeImp;
 
-  const setNewWeather = (weatherData: Weather) => {
-    weather = weatherData;
+  onMount(async () => {
+    await loadInitialWeather();
     isLoading = false;
-  };
+  });
 
-  getWeather(setNewWeather);
-
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     isLoading = true;
-    setWeather(city);
+    await updateWeather(city);
+    isLoading = false;
     city = '';
   };
 </script>
@@ -39,26 +38,32 @@
     <div class="row mt-4">
       <div class="col-12 col-md-6">
         <h1>
-          <img class="bg-secondary" src={weather.weatherIcon} alt={city} />
-          {weather.degrees}°C
+          <img
+            class="bg-secondary"
+            src={$store.weather.weatherIcon}
+            alt={$store.weather.city}
+          />
+          {$store.weather.degrees}°C
         </h1>
         <h4>
           City:
           <span class="fw-bold">
-            {weather.city}, {weather.country}
+            {$store.weather.city}, {$store.weather.country}
           </span>
         </h4>
-        <h4>Weather: <span class="fw-bold">{weather.description}</span></h4>
+        <h4>
+          Weather: <span class="fw-bold">{$store.weather.description}</span>
+        </h4>
       </div>
       <div class="col-12 col-md-6 ">
         <h4>
           Min Temp: <span class="fw-bold text-primary"
-            >{weather.minDegrees}°C</span
+            >{$store.weather.minDegrees}°C</span
           >
         </h4>
         <h4>
           Max Temp: <span class="fw-bold text-danger"
-            >{weather.maxDegrees}°C</span
+            >{$store.weather.maxDegrees}°C</span
           >
         </h4>
       </div>

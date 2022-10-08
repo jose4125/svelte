@@ -1,20 +1,27 @@
 import { getWeatherService } from './services/getWeatherService';
-import { getWeatherUseCase } from 'weather/application/getWeatherUseCase';
 import { setWeatherUseCase } from 'weather/application/setWeatherUseCase';
+import type { WeatherRepository } from 'weather/domain/weatherRepository';
+import type { Weather } from 'weather/domain/weatherEntity';
 
-export const weatherController = store => {
-  const getWeather = cb => {
-    getWeatherUseCase({ getWeather: store.getWeather, setWeather: cb });
+export const weatherController = (store: WeatherRepository) => {
+  const loadInitialWeather = async () => {
+    const newWeather = await getWeatherService();
+    setWeatherUseCase({
+      setWeather: store.loadInitialWeather,
+      weather: newWeather,
+    });
   };
 
-  const setWeather = async (city: string) => {
+  const updateWeather = async (city: Weather['city']) => {
     const newWeather = await getWeatherService(city);
-    setWeatherUseCase({ setWeather: store.setWeather, weather: newWeather });
-    // store.setWeather(newWeather);
+    setWeatherUseCase({
+      setWeather: store.updateWeather,
+      weather: newWeather,
+    });
   };
 
   return {
-    getWeather,
-    setWeather,
+    loadInitialWeather,
+    updateWeather,
   };
 };
