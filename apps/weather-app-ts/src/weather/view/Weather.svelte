@@ -2,9 +2,14 @@
   import { onMount } from 'svelte';
   import { weatherStoreImplementation } from 'weather/infrastructure/weatherStoreImplementation';
   import { weatherController } from 'weather/infrastructure/weatherController';
+  import Alert from 'ui/Alert.svelte';
+  import Spinner from 'ui/Spinner.svelte';
+  import Button from 'ui/Button.svelte';
+  import WeatherDetail from './WeatherDetail.svelte';
 
   let city = '';
   let isLoading = true;
+  let error = '';
 
   const storeImp = weatherStoreImplementation();
   const { loadInitialWeather, updateWeather } = weatherController(storeImp);
@@ -16,10 +21,23 @@
   });
 
   const handleSubmit = async () => {
+    if (!city.trim()) {
+      error = 'city field should not be empty';
+      throw new Error(error);
+    }
     isLoading = true;
-    await updateWeather(city);
-    isLoading = false;
-    city = '';
+
+    try {
+      await updateWeather(city);
+      error = '';
+      isLoading = false;
+      city = '';
+    } catch (e) {
+      error = 'the city was not found';
+      isLoading = false;
+      city = '';
+      throw new Error(error);
+    }
   };
 </script>
 
@@ -29,14 +47,17 @@
       <label>
         city:<input class="form-control" bind:value={city} />
       </label>
-      <button type="submit" class="btn btn-info">search</button>
+      <Button {isLoading}>
+        {isLoading ? 'searching...' : 'search'}
+      </Button>
     </form>
   </div>
   {#if isLoading}
-    <div class="row mt-4 justify-content-center">The weather is loading...</div>
+    <Spinner />
   {:else}
     <div class="row mt-4">
-      <div class="col-12 col-md-6">
+      <WeatherDetail data={$store} />
+      <!-- <div class="col-12 col-md-6">
         <h1>
           <img
             class="bg-secondary"
@@ -66,7 +87,10 @@
             >{$store.weather.maxDegrees}°C</span
           >
         </h4>
-      </div>
+      </div> -->
     </div>
+    {#if error}
+      <Alert message={error} />
+    {/if}
   {/if}
 </div>
