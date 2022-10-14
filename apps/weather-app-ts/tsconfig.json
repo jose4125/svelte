@@ -3,6 +3,7 @@
   "compilerOptions": {
     "paths": {
       "weather/*": ["./src/weather/*"],
+      "ui/*": ["./src/ui/*"],
       "weatherClean/*": ["./src/weather-clean/*"]
     },
     "target": "ESNext",
