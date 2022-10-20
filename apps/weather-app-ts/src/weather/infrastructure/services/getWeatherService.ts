@@ -11,6 +11,10 @@ export const getWeatherService = async (city = defaultCity) => {
   const res = await fetch(
     `${openWeather}?q=${city}&units=metric&appid=${apiKey}`,
   );
+
+  if (!res.ok) {
+    throw new Error('the city was not found');
+  }
   const weatherData = (await res.json()) as WeatherResponse;
   return create(weatherAdapter(weatherData));
 };

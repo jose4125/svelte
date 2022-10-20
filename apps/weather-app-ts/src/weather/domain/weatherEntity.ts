@@ -1,5 +1,3 @@
-import type { Writable } from 'svelte/store';
-
 export interface Weather {
   city: string;
   country: string;
@@ -11,15 +9,13 @@ export interface Weather {
 }
 
 export interface WeatherStore {
-  store: Writable<{
-    weather: {
-      city: string;
-      country: string;
-      degrees: number;
-      weatherIcon: string;
-      maxDegrees: number;
-      minDegrees: number;
-      description: string;
-    };
-  }>;
+  weather: {
+    city: string;
+    country: string;
+    degrees: number;
+    weatherIcon: string;
+    maxDegrees: number;
+    minDegrees: number;
+    description: string;
+  };
 }
